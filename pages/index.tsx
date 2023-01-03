@@ -30,7 +30,7 @@ const Home =({
   
 }: Props) => {
    return (
-   <div className='relative h-screen bg-gradient-to-b from-gray-900/10  to-[#010511]
+   <div className='relative h-screen bg-gradient-to-b
     lg:h-[140vh]' >
       <Head>
         <title>Home - Netflix</title>
@@ -41,14 +41,14 @@ const Home =({
       <Header/>
       <main className='relative pl-4 pb-24 lg:space-y-24 lg:pl-16'>
         <Banner netflixOriginals={netflixOriginals}/>
-        <section>
+        <section className='md:space-y-24'>
           <Row title='Trending now' Movies={trendingNow}/>
           <Row title ="Top Rated" Movies={topRated}/>
           <Row title ="Action Movies" Movies={actionMovies}/>
           <Row title ="Comedy Movies" Movies={comedyMovies}/>
           <Row title ="Horror Movies" Movies={horrorMovies}/>
           <Row title ="Romance Movies" Movies={romanceMovies}/>
-          
+
           
           
         </section>
