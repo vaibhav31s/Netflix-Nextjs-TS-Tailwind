@@ -5,6 +5,7 @@ import Header from '../components/Header'
 import requests from '../utils/requests'
 import { Movie } from '../typing'
 import Banner from '../components/Banner'
+import Row from '../components/Row'
 
 const inter = Inter({ subsets: ['latin'] })
 interface Props{
@@ -38,15 +39,18 @@ const Home =({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header/>
-      <main>
+      <main className='relative pl-4 pb-24 lg:space-y-24 lg:pl-16'>
         <Banner netflixOriginals={netflixOriginals}/>
         <section>
-          {/* row  */}
-          {/* row  */}
-          {/* row  */}
-          {/* row  */}
-          {/* row  */}
-          {/* row  */}
+          <Row title='Trending now' Movies={trendingNow}/>
+          <Row title ="Top Rated" Movies={topRated}/>
+          <Row title ="Action Movies" Movies={actionMovies}/>
+          <Row title ="Comedy Movies" Movies={comedyMovies}/>
+          <Row title ="Horror Movies" Movies={horrorMovies}/>
+          <Row title ="Romance Movies" Movies={romanceMovies}/>
+          
+          
+          
         </section>
         {/* modal */ }
       </main>

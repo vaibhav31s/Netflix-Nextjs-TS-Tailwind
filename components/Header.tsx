@@ -22,8 +22,8 @@ const Header = () => {
     }, [])
     
   return (
-    // <header className={`${isScrolled && 'bg-transparent	'}`}>
-    <header className={'bg-transparent'}>
+    <header className={`${isScrolled ? 'bg-[#141414]' :'bg-transparent'}`}>
+    {/* // <header className={'bg-transparent'}> */}
       <div className="flex items-center space-x-2 md:space-x-10 ">
         <img
           src="https://rb.gy/ulxxee"
