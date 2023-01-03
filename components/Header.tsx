@@ -29,6 +29,7 @@ const Header = () => {
           src="https://rb.gy/ulxxee"
           width={100}
           height={100}
+          alt=""
           className="cursor-pointer object-contain"
         />
         <ul className="hidden space-x-4 md:flex" >
