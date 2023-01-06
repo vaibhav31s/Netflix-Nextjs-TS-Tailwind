@@ -3,15 +3,30 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import useAuth from '../hooks/useAuth'
-
+import {signInWithPopup, GoogleAuthProvider} from "firebase/auth"
+import { auth } from '../firebase'
+import Router from 'next/router'
+import Link from 'next/link'
+import { FcGoogle } from 'react-icons/fc'
 interface Inputs {
   email: string
   password: string
 }
 
 function Login() {
+
+  
+  const googleProvider = new GoogleAuthProvider() ;
+  const loginGoogle = async () => {
+    const result = await signInWithPopup(auth, googleProvider);
+    Router.push('/');
+  }
+  
+
+
   const [login, setLogin] = useState(false)
   const { signIn, signUp } = useAuth()
+
 
   const {
     register,
@@ -100,8 +115,16 @@ function Login() {
           >
             Sign up now
           </button>
+         
+        </div>
+        <div  className="flex  items-center justify-center space-x-2 mt-4  cursor-pointer  transition duration-200 ease-in-out transform hover:scale-105 hover:text-white-500 hover:bg-[#E50914] rounded-full py-2 px-4 "
+          
+           onClick={loginGoogle} > 
+          
+         Login <FcGoogle className='text-2xl'></FcGoogle>oogle
         </div>
       </form>
+     
     </div>
   )
 }
