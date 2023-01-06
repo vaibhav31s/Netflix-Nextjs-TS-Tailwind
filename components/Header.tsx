@@ -1,10 +1,10 @@
 import {MagnifyingGlassIcon ,BellIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-
+import useAuth from '../hooks/useAuth';
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false)
-
+    const {logout,user} = useAuth();
     useEffect(() => {
       const handleScroll = () => {
         if (window.scrollY > 0) {
@@ -42,9 +42,11 @@ const Header = () => {
         </div>
         <div className='flex items-center space-x-4 font-light'>
             <MagnifyingGlassIcon className="hidden h-6 w-6 sm:inline " />  
-            <p className='hidden lg:inline'>Kids</p>  
+            <p className='hidden lg:inline'>{user?.email}</p>  
             <BellIcon className="h-6 w-6 " />
-            <Link href="/account">
+            <Link onClick={()=>{
+               logout();
+            }}href="/login">
                 <img
                 src="https://rb.gy/g1pwyx"
                 alt=""
