@@ -6,6 +6,9 @@ import requests from '../utils/requests'
 import { Movie } from '../typing'
 import Banner from '../components/Banner'
 import Row from '../components/Row'
+import useAuth from '../hooks/useAuth'
+import { useRecoilValue } from 'recoil'
+import { Modal } from '../components/Modal'
 
 const inter = Inter({ subsets: ['latin'] })
 interface Props{
@@ -29,6 +32,10 @@ const Home =({
   romanceMovies,
   
 }: Props) => {
+  const {loading} = useAuth();
+  // const showModal = useRecoilValue()
+
+  // const[showModal, setShowModal] = useState(false)
    return (
    <div className='relative h-screen bg-gradient-to-b
     lg:h-[140vh]' >
@@ -48,11 +55,7 @@ const Home =({
           <Row title ="Comedy Movies" Movies={comedyMovies}/>
           <Row title ="Horror Movies" Movies={horrorMovies}/>
           <Row title ="Romance Movies" Movies={romanceMovies}/>
-
-          
-          
         </section>
-        {/* modal */ }
       </main>
     </div>
   )
