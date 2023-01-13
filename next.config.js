@@ -1,10 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  ignoreDuringBuilds: true,
   images: {
     domains: ['image.tmdb.org','rb.gy'],
   },
+  
 }
 
-module.exports = nextConfig
+const { withSuperjson } = require('next-superjson')
+
+module.exports = withSuperjson()(nextConfig)

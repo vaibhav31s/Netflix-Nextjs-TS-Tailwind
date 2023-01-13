@@ -15,6 +15,11 @@ const Banner = ({netflixOriginals} : Props) => {
     const [showModal, setShowModal] = useRecoilState(modalState)
     const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
 
+    const handlePlay = () => {
+        setCurrentMovie(movie)
+        setShowModal(true)
+        console.log(movie)
+    }
 
     const [movie, setMovie] = useState<Movie | null>(null)
     useEffect(
@@ -36,12 +41,8 @@ const Banner = ({netflixOriginals} : Props) => {
         <p className='max-w-xs text-shadow-lg text-xs  md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl'>{movie?.overview}</p>
 
         <div className='flex space-x-3'>
-         <button className='bannerButton bg-white text-black'><FaPlay className='h-4 w-4 text-black md:h-7 md:w-7'/>Play</button>
-         <button className='bannerButton bg-[gray]/70' onClick={()=>{
-                setCurrentMovie(movie)
-                setShowModal(true)
-
-         }} ><InformationCircleIcon className='h-5 w-5 text-black md:h-8 md:w-8'/>More Info</button>
+         <button className='bannerButton bg-white text-black' onClick={()=>console.log("asdfasd")}><FaPlay className='h-4 w-4 text-black md:h-7 md:w-7'/>Play</button>
+         <button className='bannerButton bg-[gray]/70' onClick={()=>handlePlay()} ><InformationCircleIcon className='h-5 w-5 text-black md:h-8 md:w-8'/>More Info</button>
         </div>
     </div>
   )
