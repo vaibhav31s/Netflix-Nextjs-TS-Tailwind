@@ -23,6 +23,7 @@ export interface Movie{
 }
 
 export interface Element {
+    types: string;
     type:
     | 'Bloopers'
     | 'featurette'
