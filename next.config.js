@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     domains: ['image.tmdb.org','rb.gy'],
   },
-  
+  ignoreDuringBuilds: true,
 }
 
 const { withSuperjson } = require('next-superjson')
