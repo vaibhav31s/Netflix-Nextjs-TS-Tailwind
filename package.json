@@ -1,8 +1,4 @@
 {
-  "engines": {
-    "node": "14.20.0",
-    "npm": "7.24.2"
-  },
   "name": "netflix-nextjs-ts-tailwind",
   "version": "0.1.0",
   "private": true,
