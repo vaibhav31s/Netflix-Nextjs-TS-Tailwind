@@ -8,7 +8,7 @@ import Banner from '../components/Banner'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import { useRecoilValue } from 'recoil'
-import { Modal } from '../components/Modal'
+
 
 const inter = Inter({ subsets: ['latin'] })
 interface Props{
