@@ -8,6 +8,8 @@ import Banner from '../components/Banner'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
 import { useRecoilValue } from 'recoil'
+import { modalState } from '../atoms/modalAtom'
+import Plans from '../components/Plans'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -33,9 +35,18 @@ const Home =({
   
 }: Props) => {
   const {loading} = useAuth();
-  // const showModal = useRecoilValue()
-
-  // const[showModal, setShowModal] = useState(false)
+  
+  const showModal = useRecoilValue(modalState)
+  const subscription = false;
+  if(loading || subscription === null) return null;
+//  <div className={`relative h-screen bg-gradient-to-b lg:h-[140vh] ${showModal && '!h-screen overflow-hidden'}`} >
+    
+//     </div>
+  if(!subscription) return (
+      <div>
+        <Plans/>
+      </div>
+    );
    return (
    <div className='relative h-screen bg-gradient-to-b
     lg:h-[140vh]' >
