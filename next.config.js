@@ -2,11 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['image.tmdb.org','rb.gy'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'image.tmdb.org' },
+      { protocol: 'https', hostname: 'rb.gy' },
+    ],
   },
-  ignoreDuringBuilds: true,
 }
 
-const { withSuperjson } = require('next-superjson')
-
-module.exports = withSuperjson()(nextConfig)
+module.exports = nextConfig

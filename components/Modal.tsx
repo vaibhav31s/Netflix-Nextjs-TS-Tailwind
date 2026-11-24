@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import ReactPlayer from 'react-player/lazy'
+import { useAtom } from 'jotai'
+import ReactPlayer from 'react-player'
 import { FaPlay, FaThumbsUp, FaVolumeOff, FaVolumeUp } from 'react-icons/fa'
 import MuiModal from '@mui/material/Modal'
 import { modalState, movieState } from '../atoms/modalAtom'
@@ -19,8 +19,8 @@ import {
   setDoc,
 } from 'firebase/firestore'
 const Modal = () => {
-  const [showModal, setShowModal] = useRecoilState(modalState)
-  const [movie, setMovie] = useRecoilState(movieState)
+  const [showModal, setShowModal] = useAtom(modalState)
+  const [movie, setMovie] = useAtom(movieState)
   const [trailerUrl, setTrailerUrl] = useState<string | null>(null)
   const [genres, setGenres] = useState<Genre[]>([])
   const [mute, setMute] = useState<boolean>(false)
@@ -129,7 +129,7 @@ const Modal = () => {
 
         <div className="relative pt-[56.25%]">
           <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${trailerUrl}`}
+            src={`https://www.youtube.com/watch?v=${trailerUrl}`}
             width="100%"
             height="100%"
             style={{ position: 'absolute', top: '0', left: '0' }}

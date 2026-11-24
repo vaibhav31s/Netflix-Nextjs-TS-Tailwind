@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from '@next/font/google'
+import { Inter } from 'next/font/google'
 import Header from '../components/Header'
 import requests from '../utils/requests'
 import { Movie } from '../typing'
 import Banner from '../components/Banner'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
-import { useRecoilValue } from 'recoil'
+import { useAtomValue } from 'jotai'
 import { modalState } from '../atoms/modalAtom'
 import Plans from '../components/Plans'
 
@@ -36,7 +36,7 @@ const Home =({
 }: Props) => {
   const {loading} = useAuth();
   
-  const showModal = useRecoilValue(modalState)
+  const showModal = useAtomValue(modalState)
   const subscription = false;
   if(loading || subscription === null) return null;
 //  <div className={`relative h-screen bg-gradient-to-b lg:h-[140vh] ${showModal && '!h-screen overflow-hidden'}`} >

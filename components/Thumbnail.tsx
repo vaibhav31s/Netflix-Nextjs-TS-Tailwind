@@ -2,7 +2,7 @@ import React from 'react'
 import { baseUrl, baseUrlImage } from '../constants/movie';
 import { Movie } from '../typing';
 import  Image  from 'next/image'
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import { modalState, movieState } from '../atoms/modalAtom';
 interface Props {
     //for firebase use document
@@ -11,8 +11,8 @@ interface Props {
 }
 
 const Thumbnail = ({movie}:Props) => {
-  const [showModal, setShowModal] = useRecoilState(modalState)
-  const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+  const [showModal, setShowModal] = useAtom(modalState)
+  const [currentMovie, setCurrentMovie] = useAtom(movieState)
 
 
   const handelClose = () => {

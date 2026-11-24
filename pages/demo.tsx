@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
-import ReactPlayer from 'react-player/lazy'
+import { useAtom } from 'jotai'
+import ReactPlayer from 'react-player'
 import { FaPlay } from 'react-icons/fa'
 import MuiModal from '@mui/material/Modal'
 import { modalState } from '../atoms/modalAtom'
@@ -8,7 +8,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Box, Typography } from '@mui/material'
 import Modal from '../components/Modal'
 const demo = () => {
-  const [showModal, setShowModal] = useRecoilState(modalState)
+  const [showModal, setShowModal] = useAtom(modalState)
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',

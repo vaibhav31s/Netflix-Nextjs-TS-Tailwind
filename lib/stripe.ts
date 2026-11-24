@@ -9,8 +9,8 @@ const payment = getStripePayments(app, {
 const loadCheckout = async (priceId: string)=>{
     await createCheckoutSession(payment, {
         price : priceId,
-        successUrl: window.location.origin,
-        cancelUrl: window.location.origin,
+        success_url: window.location.origin,
+        cancel_url: window.location.origin,
             }).then((snapshot)=>{
                 window.location.assign(snapshot.url)
             }).catch((error)=>{ console.log(error.message)})

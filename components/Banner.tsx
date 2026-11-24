@@ -4,7 +4,7 @@ import { Movie } from '../typing';
 import {InformationCircleIcon, PlayIcon} from '@heroicons/react/24/outline';
 import {baseUrl} from '../constants/movie';
 import {FaPlay} from 'react-icons/fa'
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 import { modalState, movieState } from '../atoms/modalAtom';
 interface Props {
     netflixOriginals: Movie[];
@@ -12,8 +12,8 @@ interface Props {
 
 const Banner = ({netflixOriginals} : Props) => {
 
-    const [showModal, setShowModal] = useRecoilState(modalState)
-    const [currentMovie, setCurrentMovie] = useRecoilState(movieState)
+    const [showModal, setShowModal] = useAtom(modalState)
+    const [currentMovie, setCurrentMovie] = useAtom(movieState)
 
 
     const handlePlay = () => {
