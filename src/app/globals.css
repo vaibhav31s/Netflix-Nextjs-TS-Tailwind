@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: #0b0b0e;
+  --color-surface: #15151b;
+  --color-surface-2: #1f1f28;
+  --color-ink: #f3f0e7;
+  --color-muted: #a09d94;
+  --color-line: rgba(243, 240, 231, 0.1);
+  --color-lime: #c8f751;
+  --color-lime-ink: #131800;
+  --color-bad: #ff7a66;
+  --font-sans: var(--ff-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--ff-display), ui-sans-serif, system-ui, sans-serif;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  *,
+  ::after,
+  ::before {
+    border-color: var(--color-line);
+  }
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  button,
+  a,
+  input {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lime);
+    outline-offset: 2px;
+    border-radius: 8px;
+  }
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-lime-ink);
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility field {
+  width: 100%;
+  height: 3.25rem;
+  padding: 0 1rem;
+  border-radius: 0.9rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  &::placeholder {
+    color: color-mix(in srgb, var(--color-muted) 70%, transparent);
+  }
+  &:focus {
+    outline: none;
+    border-color: var(--color-lime);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-lime) 22%, transparent);
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+@keyframes drift {
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shimmer::after,
+  .drift,
+  .kenburns {
+    animation: none !important;
+  }
+}

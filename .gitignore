@@ -37,3 +37,7 @@ yarn-error.log*
 next-env.d.ts
 
 package-lock.json
+
+# env files (may contain secrets)
+.env*
+!.env.example
