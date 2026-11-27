@@ -21,8 +21,13 @@ export async function POST(req: Request) {
   if (password.length > 200) return bad("That password is too long.");
 
   try {
-    if (await prisma.user.findUnique({ where: { email }, select: { id: true } })) {
-      return bad("You already have an account with this email. Try signing in.");
+    const taken = await prisma.user.findUnique({ where: { email }, select: { password: true } });
+    if (taken) {
+      return bad(
+        taken.password.startsWith("oauth:")
+          ? "This email already signed up with Google. Use the Google button to sign in."
+          : "You already have an account with this email. Try signing in."
+      );
     }
     await prisma.user.create({ data: { name, email, password: await hash(password, 10) } });
     return NextResponse.json({ ok: true });

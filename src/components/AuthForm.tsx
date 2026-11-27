@@ -8,13 +8,32 @@ import { useState } from "react";
 import { Logo } from "./icons";
 import { ease, spring } from "./providers";
 
-export default function AuthForm({ mode }: { mode: "login" | "register" }) {
+const problems: Record<string, string> = {
+  "use-password": "This email already has a password here. Sign in with your email and password below.",
+  google: "Google couldn't confirm that email. Please try again or use a password.",
+  OAuthCallback: "Google sign-in didn't finish. Please try again.",
+  OAuthSignin: "Couldn't reach Google. Please try again.",
+  AccessDenied: "Google sign-in was cancelled.",
+};
+
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden>
+      <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.300C33.700 32.700 29.200 36 24 36c-6.600 0-12-5.400-12-12s5.400-12 12-12c3.100 0 5.800 1.200 8 3l5.700-5.700C34 6.100 29.300 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.300-.1-2.600-.4-3.900z" />
+      <path fill="#FF3D00" d="M6.300 14.700l6.600 4.800C14.700 15.100 19 12 24 12c3.100 0 5.800 1.200 8 3l5.700-5.700C34 6.100 29.300 4 24 4 16.300 4 9.700 8.300 6.300 14.700z" />
+      <path fill="#4CAF50" d="M24 44c5.200 0 9.900-2 13.400-5.200l-6.200-5.200C29.200 35.100 26.700 36 24 36c-5.200 0-9.600-3.300-11.300-7.900l-6.500 5C9.500 39.600 16.200 44 24 44z" />
+      <path fill="#1976D2" d="M43.600 20.100H42V20H24v8h11.300c-.8 2.200-2.200 4.200-4.100 5.600l6.200 5.200C37 39.200 44 34 44 24c0-1.300-.1-2.600-.4-3.900z" />
+    </svg>
+  );
+}
+
+export default function AuthForm({ mode, google = false, problem }: { mode: "login" | "register"; google?: boolean; problem?: string }) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(problem ? problems[problem] ?? "Couldn't sign you in. Please try again." : "");
   const register = mode === "register";
 
   const submit = async (e: React.FormEvent) => {
@@ -61,7 +80,30 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
         <p className="mt-2 text-muted">
           {register ? "Free forever. Your list follows you to every device." : "Sign in to pick up your list."}
         </p>
-        <form onSubmit={submit} className="mt-6 space-y-3">
+        {google && (
+          <>
+            <motion.button
+              type="button"
+              disabled={busy}
+              whileTap={{ scale: 0.97 }}
+              transition={spring}
+              onClick={() => {
+                setBusy(true);
+                void signIn("google", { callbackUrl: "/browse" });
+              }}
+              className="mt-6 flex h-13 w-full items-center justify-center gap-3 rounded-full bg-white text-base font-bold text-[#1f1f1f] disabled:opacity-60"
+            >
+              <GoogleIcon />
+              Continue with Google
+            </motion.button>
+            <div className="mt-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-widest text-muted" aria-hidden>
+              <span className="h-px flex-1 bg-white/10" />
+              or
+              <span className="h-px flex-1 bg-white/10" />
+            </div>
+          </>
+        )}
+        <form onSubmit={submit} className={google ? "mt-5 space-y-3" : "mt-6 space-y-3"}>
           {register && (
             <label className="block">
               <span className="mb-1.5 block text-sm font-semibold">Your name</span>
